@@ -30,21 +30,3 @@ func SaveHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("OK"))
 }
-
-// ReadHandler — GET /api/read
-// возвращает содержимое data.txt
-func ReadHandler(w http.ResponseWriter, r *http.Request) {
-	data, err := os.ReadFile("data.txt")
-	if err != nil {
-		if os.IsNotExist(err) {
-			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-			w.WriteHeader(http.StatusOK)
-			w.Write([]byte(""))
-			return
-		}
-		http.Error(w, "Read error", http.StatusInternalServerError)
-		return
-	}
-	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	w.Write(data)
-}
