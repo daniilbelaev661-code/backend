@@ -28,9 +28,9 @@ func main() {
 
 	r.Route("/api", func(r chi.Router) {
 		r.Post("/save", handlers.SaveHandler)
-
+		r.Get("/read", handlers.ReadHandler) // <-- новое в v2.0
 	})
 
-	log.Println("Backend 1.0 (chi) running on :8080")
+	log.Println("Backend 2.0 (chi) running on :8080")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
